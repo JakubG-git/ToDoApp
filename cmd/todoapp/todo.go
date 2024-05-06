@@ -2,6 +2,7 @@ package main
 
 import (
 	"ToDoApp/pkg"
+	"ToDoApp/pkg/auth"
 	"ToDoApp/pkg/config"
 	"ToDoApp/pkg/logging"
 	"flag"
@@ -10,13 +11,14 @@ import (
 )
 
 func main() {
-	logging.ConfigureLogger()
-	logging.Logger.Info("Starting ToDoApp")
 	cfg := parseConfig()
+	logging.ConfigureLogger(cfg.ConfigMode)
+	logging.Logger.Info("Starting ToDoApp")
 	runServer(*cfg)
 }
 
 func runServer(cfg config.Config) {
+	auth.ConfigureAuth(cfg.Auth)
 	server := pkg.ConfigureServer(cfg)
 	if cfg.Server.Port == 0 {
 		cfg.Server.Port = 8080

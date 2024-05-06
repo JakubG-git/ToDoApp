@@ -2,19 +2,20 @@ package pkg
 
 import (
 	"ToDoApp/pkg/config"
+	"ToDoApp/pkg/logging"
 	"github.com/gin-contrib/cors"
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
-	"go.uber.org/zap"
 	"time"
 )
 
 func ConfigureServer(cfg config.Config) *gin.Engine {
-	gin.SetMode(gin.ReleaseMode)
 	e := gin.New()
-	logger, _ := zap.NewProduction()
-	e.Use(ginzap.GinzapWithConfig(logger, loggerConfig))
-	e.Use(ginzap.RecoveryWithZap(logger, true))
+	if cfg.ConfigMode == config.Production {
+		gin.SetMode(gin.ReleaseMode)
+	}
+	e.Use(ginzap.GinzapWithConfig(logging.Logger, loggerConfig))
+	e.Use(ginzap.RecoveryWithZap(logging.Logger, true))
 	e.Use(cors.New(corsConfig))
 	SetupRoutes(e, cfg.DB)
 	return e

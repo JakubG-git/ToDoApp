@@ -1,12 +1,31 @@
 package auth
 
 import (
+	"ToDoApp/pkg/config"
+	"ToDoApp/pkg/logging"
+	"crypto/rand"
 	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
+	"go.uber.org/zap"
+	"math/big"
 	"time"
 )
+
+func ConfigureAuth(auth config.AuthConfig) {
+	secretLength := auth.Length
+	if secretLength < minSecretLength {
+		logging.Logger.Warn("Secret length too short, using minimum length", zap.Int("length", secretLength))
+		secretLength = minSecretLength
+	}
+	secret, err := generateRandomString(secretLength)
+	if err != nil {
+		panic(err)
+	}
+	jwtKey = []byte(secret)
+	logging.Logger.Debug("Generated jwt secret", zap.String("jwt-secret", secret))
+}
 
 func AuthMiddleware() gin.HandlerFunc {
 	return JwtAuthReq()
@@ -147,8 +166,24 @@ func generateTokenPair(username string) (string, string, error) {
 	return tokenString, refreshTokenString, nil
 }
 
+// Credit: https://gist.github.com/dopey/c69559607800d2f2f90b1b1ed4e550fb
+func generateRandomString(n int) (string, error) {
+	const letters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-!;#$%&'()*+,-./:;<=>?@[]^_`{|}~"
+	ret := make([]byte, n)
+	for i := 0; i < n; i++ {
+		num, err := rand.Int(rand.Reader, big.NewInt(int64(len(letters))))
+		if err != nil {
+			return "", err
+		}
+		ret[i] = letters[num.Int64()]
+	}
+
+	return string(ret), nil
+}
+
 var (
-	jwtKey                   = []byte("x;=w.g*eK@v5]<DZsHM^kd,VB2N[-hA3}b8zECWfUt!m_a4:cX")
+	minSecretLength          = 64
+	jwtKey                   []byte
 	jwtParser                = jwt.NewParser(jwt.WithValidMethods([]string{"HS256"}))
 	ErrorTokenExpired        = errors.New("token expired")
 	ErrorTokenInvalid        = errors.New("token invalid")

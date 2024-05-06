@@ -1,11 +1,17 @@
 package logging
 
-import "go.uber.org/zap"
+import (
+	"ToDoApp/pkg/config"
+	"go.uber.org/zap"
+)
 
 var Logger *zap.Logger
 
-func ConfigureLogger() {
+func ConfigureLogger(configMode config.Mode) {
 	// Configure logger
-	logger, _ := zap.NewProduction()
-	Logger = logger
+	if configMode == config.Development {
+		Logger, _ = zap.NewDevelopment()
+	} else {
+		Logger, _ = zap.NewProduction()
+	}
 }

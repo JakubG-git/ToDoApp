@@ -6,9 +6,18 @@ import (
 	"os"
 )
 
+type Mode string
+
+const (
+	Development Mode = "dev"
+	Production       = "prod"
+)
+
 type Config struct {
-	Server ServerConfig   `yaml:"server"`
-	DB     DatabaseConfig `yaml:"database"`
+	Server     ServerConfig   `yaml:"server"`
+	DB         DatabaseConfig `yaml:"database"`
+	Auth       AuthConfig     `yaml:"auth"`
+	ConfigMode Mode           `yaml:"mode"`
 }
 
 type ServerConfig struct {
@@ -22,6 +31,10 @@ type DatabaseConfig struct {
 	Password string `yaml:"pass"`
 	DBName   string `yaml:"dbname"`
 	SSLMode  string `yaml:"sslmode"`
+}
+
+type AuthConfig struct {
+	Length int `yaml:"length"`
 }
 
 func NewConfig() *Config {

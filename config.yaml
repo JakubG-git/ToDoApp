@@ -7,3 +7,6 @@ database:
   pass: postgres
   dbname: todoapp
   sslmode: disable
+auth:
+  length: 128
+mode: prod
