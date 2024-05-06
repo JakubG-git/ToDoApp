@@ -1,0 +1,9 @@
+server:
+  port: 8080
+database:
+  port: 5432
+  host: db
+  user: postgres
+  pass: postgres
+  dbname: todoapp
+  sslmode: disable
