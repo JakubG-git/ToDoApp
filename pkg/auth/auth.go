@@ -1,10 +1,10 @@
 package auth
 
 import (
-	"ToDoApp/pkg/config"
-	"ToDoApp/pkg/logging"
 	"crypto/rand"
 	"errors"
+	"github.com/JakubG-git/ToDoApp/pkg/config"
+	"github.com/JakubG-git/ToDoApp/pkg/logging"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"

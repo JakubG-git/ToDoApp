@@ -1,7 +1,7 @@
 package logging
 
 import (
-	"ToDoApp/pkg/config"
+	"github.com/JakubG-git/ToDoApp/pkg/config"
 	"go.uber.org/zap"
 )
 

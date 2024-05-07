@@ -1,12 +1,12 @@
 package main
 
 import (
-	"ToDoApp/pkg"
-	"ToDoApp/pkg/auth"
-	"ToDoApp/pkg/config"
-	"ToDoApp/pkg/logging"
 	"flag"
 	"fmt"
+	"github.com/JakubG-git/ToDoApp/pkg"
+	"github.com/JakubG-git/ToDoApp/pkg/auth"
+	"github.com/JakubG-git/ToDoApp/pkg/config"
+	"github.com/JakubG-git/ToDoApp/pkg/logging"
 	"go.uber.org/zap"
 )
 
@@ -24,7 +24,7 @@ func runServer(cfg config.Config) {
 		cfg.Server.Port = 8080
 	}
 	logging.Logger.Info("Starting server", zap.Int("port", cfg.Server.Port))
-	server.Run(fmt.Sprintf(":%d", cfg.Server.Port))
+	logging.Logger.Fatal("Server error: ", zap.Error(server.Run(fmt.Sprintf(":%d", cfg.Server.Port))))
 }
 
 func parseConfig() *config.Config {

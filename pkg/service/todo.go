@@ -1,9 +1,9 @@
 package service
 
 import (
-	model2 "ToDoApp/pkg/controller/model"
-	"ToDoApp/pkg/repository"
-	"ToDoApp/pkg/repository/model"
+	model2 "github.com/JakubG-git/ToDoApp/pkg/controller/model"
+	"github.com/JakubG-git/ToDoApp/pkg/repository"
+	"github.com/JakubG-git/ToDoApp/pkg/repository/model"
 )
 
 type ToDoServiceInterface interface {

@@ -2,7 +2,7 @@
 SHELL := /bin/bash
 
 # all the recipes are phony (no files to check).
-.PHONY: build dev test fmt clean compose all-docker all-local help
+.PHONY: build dev test fmt clean compose all-docker all-local help watch
 
 .DEFAULT_GOAL := help
 
@@ -19,19 +19,19 @@ help:
 	@echo "  compose						  runs the docker-compose"
 	@echo "  all-docker						  runs all the targets for docker"
 	@echo "  all-local						  runs all the targets for local"
-	@echo ""
+	@echo "  watch							  runs the project in watch mode"
 	@echo ""
 	@echo "Check the Makefile to know exactly what each target is doing."
 
 # Build the project
 build:
 	@echo "Building the project..."
-	@go build -o bin/main cmd/main.go
+	@go build -o todoapp cmd/todoapp/todo.go
 
 # Run the project in development mode
 dev:
 	@echo "Running the project in development mode..."
-	@go run cmd/main.go
+	@go run cmd/todoapp/todo.go
 
 # Run the tests
 test:
@@ -59,4 +59,9 @@ all-docker: clean fmt build compose
 
 # Run all-local targets
 all-local: clean fmt build dev
+
+# Run the project in watch mode
+watch:
+	@echo "Running the project in watch mode..."
+	@docker compose watch
 

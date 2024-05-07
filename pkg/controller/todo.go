@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"ToDoApp/pkg/controller/model"
-	"ToDoApp/pkg/service"
+	"github.com/JakubG-git/ToDoApp/pkg/controller/model"
+	"github.com/JakubG-git/ToDoApp/pkg/service"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"

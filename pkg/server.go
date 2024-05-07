@@ -1,8 +1,8 @@
 package pkg
 
 import (
-	"ToDoApp/pkg/config"
-	"ToDoApp/pkg/logging"
+	"github.com/JakubG-git/ToDoApp/pkg/config"
+	"github.com/JakubG-git/ToDoApp/pkg/logging"
 	"github.com/gin-contrib/cors"
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"

@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"ToDoApp/pkg/repository/model"
+	"github.com/JakubG-git/ToDoApp/pkg/repository/model"
 	"gorm.io/gorm"
 )
 

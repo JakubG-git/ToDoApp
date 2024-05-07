@@ -1,4 +1,4 @@
-module ToDoApp
+module github.com/JakubG-git/ToDoApp
 
 go 1.21
 

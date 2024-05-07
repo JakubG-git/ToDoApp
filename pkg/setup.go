@@ -1,13 +1,13 @@
 package pkg
 
 import (
-	"ToDoApp/pkg/auth"
-	"ToDoApp/pkg/config"
-	"ToDoApp/pkg/controller"
-	"ToDoApp/pkg/logging"
-	"ToDoApp/pkg/repository"
-	"ToDoApp/pkg/repository/model"
-	"ToDoApp/pkg/service"
+	"github.com/JakubG-git/ToDoApp/pkg/auth"
+	"github.com/JakubG-git/ToDoApp/pkg/config"
+	"github.com/JakubG-git/ToDoApp/pkg/controller"
+	"github.com/JakubG-git/ToDoApp/pkg/logging"
+	"github.com/JakubG-git/ToDoApp/pkg/repository"
+	"github.com/JakubG-git/ToDoApp/pkg/repository/model"
+	"github.com/JakubG-git/ToDoApp/pkg/service"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"gorm.io/gorm"

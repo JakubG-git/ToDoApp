@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"ToDoApp/pkg/repository/model"
 	"errors"
+	"github.com/JakubG-git/ToDoApp/pkg/repository/model"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
